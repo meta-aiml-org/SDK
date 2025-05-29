@@ -1,0 +1,47 @@
+Meta-AIML.org Source-Available License
+
+Copyright (c) 2025 Meta AIML Team
+
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of this software and associated documentation files (the "Software"),
+to use the Software subject to the following conditions:
+
+PERMITTED USES:
+✅ View, study, and inspect the source code
+✅ Use the Software in your applications and projects
+✅ Use the Software for commercial purposes
+✅ Use the Software for educational and research purposes
+✅ Report bugs and suggest improvements
+
+PROHIBITED ACTIONS:
+🚫 Modify, alter, or create derivative works of the Software
+🚫 Redistribute, publish, or share the source code
+🚫 Fork, clone, or create competing implementations
+🚫 Reverse engineer proprietary algorithms or implementations
+🚫 Remove or modify copyright notices
+🚫 Use Meta-AIML.org branding without written permission
+
+PROJECT CONTROL:
+The copyright holder maintains exclusive control over:
+- Software architecture and design decisions
+- Feature development and roadmap
+- Contribution acceptance (at sole discretion)
+- Release schedules and versioning
+- Schema evolution and standards
+
+DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+TERMINATION:
+This license automatically terminates if you violate any of the prohibited actions.
+Upon termination, you must immediately cease all use of the Software and destroy
+all copies in your possession.
+
+For questions about this license or to request permissions beyond those granted,
+contact: team@meta-aiml.org
