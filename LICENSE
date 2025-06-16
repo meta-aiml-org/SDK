@@ -1,35 +1,47 @@
-Meta-AIML.org Source-Available License
+META-AIML.ORG SOURCE-AVAILABLE LICENSE v2.0
 
-Copyright (c) 2025 Meta AIML Team
+Copyright (c) 2025 META-AIML.ORG - IURII IURIEV
 
-Permission is hereby granted, free of charge, to any person or organization
-obtaining a copy of this software and associated documentation files (the "Software"),
-to use the Software subject to the following conditions:
+===== PERMITTED USES =====
 
-PERMITTED USES:
-✅ View, study, and inspect the source code
-✅ Use the Software in your applications and projects
-✅ Use the Software for commercial purposes
-✅ Use the Software for educational and research purposes
-✅ Report bugs and suggest improvements
+✅ WHAT YOU CAN DO:
+- View, inspect, study, and learn from all source code
+- Use AIML schemas in your projects freely (personal and commercial)
+- Integrate SDK in your applications (personal and commercial)
+- Study code for educational and research purposes
+- Report bugs and suggest improvements
 
-PROHIBITED ACTIONS:
-🚫 Modify, alter, or create derivative works of the Software
-🚫 Redistribute, publish, or share the source code
-🚫 Fork, clone, or create competing implementations
-🚫 Reverse engineer proprietary algorithms or implementations
-🚫 Remove or modify copyright notices
-🚫 Use Meta-AIML.org branding without written permission
+❌ WHAT YOU CANNOT DO:
+- Modify, patch, or change source code
+- Redistribute, share, publish, or distribute source code
+- Fork, clone, or create derivative versions
+- Reverse engineer proprietary algorithms or implementations
+- Package and sell as competing service
+- Use Meta-AIML.org branding without permission
 
-PROJECT CONTROL:
-The copyright holder maintains exclusive control over:
-- Software architecture and design decisions
-- Feature development and roadmap
-- Contribution acceptance (at sole discretion)
+===== PROJECT CONTROL =====
+
+The project owner (META-AIML.ORG - IURII IURIEV) maintains exclusive control over:
+- Schema design and evolution
+- SDK feature development
+- Architecture decisions
 - Release schedules and versioning
-- Schema evolution and standards
+- Contribution acceptance (at sole discretion)
 
-DISCLAIMER:
+===== COLLABORATION =====
+
+Community input is welcomed through:
+- Detailed bug reports and feature requests
+- Schema suggestions and improvements
+- Use case discussions and feedback
+- Documentation clarity suggestions
+
+All contributions are reviewed and implemented solely at the discretion of
+the project owner. Suggestions may be incorporated, modified, or declined
+without obligation to provide detailed explanations.
+
+===== DISCLAIMER =====
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -38,10 +50,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-TERMINATION:
-This license automatically terminates if you violate any of the prohibited actions.
-Upon termination, you must immediately cease all use of the Software and destroy
-all copies in your possession.
+===== LICENSE GRANT =====
 
-For questions about this license or to request permissions beyond those granted,
-contact: team@meta-aiml.org
+You are granted a non-exclusive, non-transferable license to view and use
+the schemas and SDK as described above. This license does not grant any
+rights to the underlying source code beyond viewing and personal study.
+
+For the most current license terms, visit: https://meta-aiml.org/terms/

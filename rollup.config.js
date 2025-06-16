@@ -1,97 +1,92 @@
-import resolve from '@rollup/plugin-node-resolve';
+import { babel } from '@rollup/plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import { terser } from 'rollup-plugin-terser';
-
-const packageJson = require('./package.json');
+import terser from '@rollup/plugin-terser';
 
 export default [
   // ES Module build
   {
-    input: 'src/index.ts',
+    input: 'src/index.js',
     output: {
       file: 'dist/index.esm.js',
-      format: 'esm',
+      format: 'es',
       sourcemap: true
     },
     plugins: [
-      resolve(),
+      nodeResolve(),
       commonjs(),
-      typescript({
-        tsconfig: './tsconfig.json',
-        outputToFilesystem: true
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+        presets: ['@babel/preset-env']
       })
-    ],
-    external: ['ajv', 'ajv-formats']
+    ]
   },
 
   // CommonJS build
   {
-    input: 'src/index.ts',
+    input: 'src/index.js',
     output: {
       file: 'dist/index.js',
       format: 'cjs',
       sourcemap: true,
-      exports: 'named'
+      exports: 'default'
     },
     plugins: [
-      resolve(),
+      nodeResolve(),
       commonjs(),
-      typescript({
-        tsconfig: './tsconfig.json'
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+        presets: ['@babel/preset-env']
       })
-    ],
-    external: ['ajv', 'ajv-formats']
+    ]
   },
 
   // Browser UMD build
   {
-    input: 'src/index.ts',
+    input: 'src/index.js',
     output: {
-      file: 'dist/AIMLParser.js',
+      file: 'dist/aiml-parser.js',
       format: 'umd',
       name: 'AIMLParser',
-      sourcemap: true,
-      globals: {
-        'ajv': 'Ajv',
-        'ajv-formats': 'addFormats'
-      }
+      sourcemap: true
     },
     plugins: [
-      resolve({ browser: true }),
+      nodeResolve(),
       commonjs(),
-      typescript({
-        tsconfig: './tsconfig.json'
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+        presets: ['@babel/preset-env']
       })
-    ],
-    external: ['ajv', 'ajv-formats']
+    ]
   },
 
-  // Browser UMD build (minified)
+  // Minified browser build
   {
-    input: 'src/index.ts',
+    input: 'src/index.js',
     output: {
-      file: 'dist/AIMLParser.min.js',
+      file: 'dist/aiml-parser.min.js',
       format: 'umd',
       name: 'AIMLParser',
-      sourcemap: true,
-      globals: {
-        'ajv': 'Ajv',
-        'ajv-formats': 'addFormats'
-      }
+      sourcemap: true
     },
     plugins: [
-      resolve({ browser: true }),
+      nodeResolve(),
       commonjs(),
-      typescript({
-        tsconfig: './tsconfig.json'
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+        presets: ['@babel/preset-env']
       }),
       terser({
         compress: {
-          drop_console: true
-        }
+          drop_console: true,
+          drop_debugger: true
+        },
+        mangle: true
       })
-    ],
-    external: ['ajv', 'ajv-formats']
+    ]
   }
 ];

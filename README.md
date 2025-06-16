@@ -1,388 +1,418 @@
 # @meta-aiml/parser
 
-Official JavaScript SDK for AIML (AI Markup Language) schema validation and processing.
+[![npm version](https://badge.fury.io/js/%40meta-aiml%2Fparser.svg)](https://badge.fury.io/js/%40meta-aiml%2Fparser)
+[![License: Source-Available](https://img.shields.io/badge/License-Source--Available-blue.svg)](https://meta-aiml.org/terms/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-[![npm version](https://badge.fury.io/js/@meta-aiml%2Fparser.svg)](https://www.npmjs.com/package/@meta-aiml/parser)
-[![License: Source-Available](https://img.shields.io/badge/License-Source--Available-blue.svg)](https://github.com/meta-aiml/sdk/blob/main/LICENSE)
+> **AIML Parser SDK v2.0.0** - Official validation library for Meta-AIML.org entity schemas
 
-## Features
+Complete schema validation for **31 entity types** across **6 categories** with comprehensive validation, semantic analysis, and performance metrics.
 
-- 🔍 **Schema Validation** - Validate AIML schemas against JSON Schema definitions
-- 🚀 **Entity Parsing** - Parse and process AIML entity data with type safety
-- 📝 **TypeScript Support** - Full TypeScript definitions for all schema types
-- 🔧 **Module Processing** - Process and validate module configurations
-- 🌐 **Browser Compatible** - Works in both Node.js and browser environments
-- 📚 **Rich Documentation** - Comprehensive API docs and examples
+## 🚀 Quick Start
 
-## Installation
+### Installation
 
-### NPM
 ```bash
 npm install @meta-aiml/parser
 ```
 
-### Yarn
-```bash
-yarn add @meta-aiml/parser
-```
+### Basic Usage
 
-### Browser CDN
-```html
-<script src="https://cdn.meta-aiml.org/sdk/AIMLParser.js"></script>
-```
-
-## Quick Start
-
-### ES6 Modules
 ```javascript
-import { AIMLParser, AIMLValidator } from '@meta-aiml/parser';
+const AIMLParser = require('@meta-aiml/parser');
 
-// Create parser instance
-const parser = new AIMLParser({
-  entityType: 'restaurant',
-  autoDetectType: true,
-  validateOnParse: true
-});
-
-// Parse entity data
-const restaurantData = {
-  "@context": "https://schemas.meta-aiml.org",
+// Validate a schema
+const parser = new AIMLParser();
+const result = parser.validate({
+  "@context": "https://schemas.meta-aiml.org/v2.0.0/context.jsonld",
   "@type": "Restaurant",
   "entityType": "restaurant",
-  "name": "Joe's Pizza",
-  "description": "Best pizza in town"
-};
-
-const restaurant = await parser.parseEntity(restaurantData);
-console.log(restaurant);
-```
-
-### CommonJS
-```javascript
-const { AIMLParser, AIMLValidator } = require('@meta-aiml/parser');
-
-const parser = new AIMLParser();
-// ... rest same as above
-```
-
-### Browser
-```html
-<script src="https://cdn.meta-aiml.org/sdk/AIMLParser.js"></script>
-<script>
-const parser = new AIMLParser.AIMLParser({
-  entityType: 'restaurant'
-});
-
-// Auto-generate form
-parser.generateForm('#my-form');
-
-// Listen for results
-document.addEventListener('aiml-form-result', (event) => {
-  if (event.detail.success) {
-    console.log('Generated entity:', event.detail.entity);
-  } else {
-    console.error('Error:', event.detail.error);
+  "entityCategory": "organization",
+  "subcategory": "hospitality",
+  "name": {
+    "en": "The Garden Bistro",
+    "es": "Bistro El Jardín"
+  },
+  "description": {
+    "en": "A delightful garden restaurant with farm-to-table cuisine"
   }
 });
-</script>
-```
 
-## API Reference
-
-### AIMLParser
-
-#### Constructor
-```typescript
-new AIMLParser(options?: ParserOptions)
-```
-
-**Options:**
-- `entityType?: SchemaType` - Default entity type
-- `autoDetectType?: boolean` - Auto-detect entity type from data (default: true)
-- `processModules?: boolean` - Process modules during parsing (default: true)
-- `validateOnParse?: boolean` - Validate during parsing (default: true)
-
-#### Methods
-
-##### `parseEntity(data: any, entityType?: SchemaType): Promise<AIMLEntity>`
-Parse raw data into AIML entity.
-
-```javascript
-const entity = await parser.parseEntity({
-  "@context": "https://schemas.meta-aiml.org",
-  "@type": "Restaurant",
-  "entityType": "restaurant",
-  "name": "My Restaurant"
-});
-```
-
-##### `extractModules(entity: AIMLEntity): AIMLModule[]`
-Extract modules from entity.
-
-```javascript
-const modules = parser.extractModules(entity);
-console.log(modules); // [{ moduleType: 'auth', version: '1.0.0', ... }]
-```
-
-##### `validate(entity: AIMLEntity): Promise<ValidationResult>`
-Validate entity against schema.
-
-```javascript
-const result = await parser.validate(entity);
-if (!result.valid) {
-  console.log('Validation errors:', result.errors);
+if (result.isValid) {
+  console.log(`✅ Valid schema! Score: ${result.score}/100`);
+  console.log(`📊 Completeness: ${result.completeness}%`);
+} else {
+  console.log('❌ Validation errors:', result.errors);
 }
 ```
 
-##### `generateForm(selector: string, entityType?: SchemaType): void`
-Generate HTML form (browser only).
+### TypeScript Support
 
-```javascript
-parser.generateForm('#form-container', 'restaurant');
+```typescript
+import AIMLParser, { AIMLSchema, AIMLValidationResult } from '@meta-aiml/parser';
+
+const schema: AIMLSchema = {
+  '@context': 'https://schemas.meta-aiml.org/v2.0.0/context.jsonld',
+  entityType: 'marketplace',
+  entityCategory: 'product_offering',
+  // ... rest of schema
+};
+
+const result: AIMLValidationResult = AIMLParser.validate(schema);
 ```
 
-### AIMLValidator
+## 📋 Features
 
-#### Constructor
-```typescript
-new AIMLValidator(options?: ValidatorOptions)
+### ✅ Complete AIML v2.0.0 Support
+- **31 Entity Types**: All official AIML entities
+- **6 Categories**: organization, product_offering, service, creative_work, community, financial_product
+- **14 Modules**: auth, payments, search, multilingual, and more
+- **15 Subcategories**: Complete hierarchical validation
+
+### 🧠 AI-Optimized Validation
+- **Semantic Properties**: Validate AI-specific fields
+- **Intent Context**: User journey and intent validation
+- **Performance Metrics**: Schema size and complexity analysis
+- **Quality Scoring**: 0-100 scoring system
+
+### 🛠️ Developer Experience
+- **TypeScript Ready**: Full type definitions included
+- **Universal Compatibility**: Works in Node.js and browsers
+- **Detailed Errors**: Comprehensive error reporting with suggestions
+- **Zero Dependencies**: Lightweight and fast
+
+## 🏗️ Entity Categories & Types
+
+<details>
+<summary><strong>📊 Organization (6 types)</strong></summary>
+
+- `clinic` - Healthcare clinics
+- `education_platform` - Educational institutions
+- `fitness_platform` - Fitness and wellness centers
+- `hotel` - Hospitality and accommodation
+- `restaurant` - Food service establishments
+- `store` - Physical retail stores
+</details>
+
+<details>
+<summary><strong>🛍️ Product Offering (4 types)</strong></summary>
+
+- `ecommerce_store` - Online retail stores
+- `marketplace` - Multi-vendor marketplaces
+- `product` - Physical products
+- `software_product` - Digital software products
+</details>
+
+<details>
+<summary><strong>🔧 Service (9 types)</strong></summary>
+
+- `business_services` - Professional services
+- `generative_ai_platform` - AI generation platforms
+- `real_estate_platform` - Property services
+- `ridesharing_service` - Transportation services
+- `task_management_app` - Productivity applications
+- `telemedicine_platform` - Remote healthcare
+- `virtual_event_platform` - Online events
+- `web_app` - Web applications
+- `website_services` - Website development
+</details>
+
+<details>
+<summary><strong>🎨 Creative Work (9 types)</strong></summary>
+
+- `blog` - Content publishing platforms
+- `event` - Events and gatherings
+- `file_hosting` - File storage services
+- `gaming_platform` - Gaming platforms
+- `news` - News and media outlets
+- `personal_website` - Personal websites
+- `photo_hosting` - Image sharing platforms
+- `streaming_platform` - Media streaming
+- `video_hosting` - Video platforms
+</details>
+
+<details>
+<summary><strong>👥 Community (2 types)</strong></summary>
+
+- `dating_platform` - Dating and relationship platforms
+- `social_network` - Social networking platforms
+</details>
+
+<details>
+<summary><strong>💰 Financial Product (1 type)</strong></summary>
+
+- `online_banking` - Digital banking platforms
+</details>
+
+## 🔧 API Reference
+
+### Constructor
+
+```javascript
+const parser = new AIMLParser(options);
 ```
 
 **Options:**
-- `schemaBaseUrl?: string` - Base URL for schemas (default: 'https://schemas.meta-aiml.org')
-- `strictMode?: boolean` - Strict validation mode (default: true)
-- `validateModules?: boolean` - Validate modules (default: true)
-- `allowAdditionalProperties?: boolean` - Allow additional properties (default: false)
+- `debug` (boolean): Enable debug mode
+- `strict` (boolean): Enable strict validation
+- `version` (string): Target AIML version
 
-#### Methods
+### Methods
 
-##### `validate(entity: any): Promise<ValidationResult>`
-Validate AIML entity.
+#### `validate(data)`
+Complete schema validation with detailed analysis.
 
-##### `validateEntity(entity: any, schemaType: SchemaType): Promise<ValidationResult>`
-Validate entity against specific schema type.
+```javascript
+const result = parser.validate(schema);
+// Returns: AIMLValidationResult
+```
 
-## Entity Types
+#### `isValid(data)`
+Quick validation check.
 
-Supported entity types:
-- `restaurant` - Restaurant entities
-- `hotel` - Hotel entities
-- `ecommerce_store` - E-commerce store entities
-- `organization` - Organization entities
-- `product` - Product entities
-- `service` - Service entities
-- `blog` - Blog entities
-- `clinic` - Medical clinic entities
-- `education_platform` - Education platform entities
-- `gaming_platform` - Gaming platform entities
-- `marketplace` - Marketplace entities
-- `news` - News organization entities
-- `social_network` - Social network entities
-- `streaming_platform` - Streaming platform entities
+```javascript
+const valid = parser.isValid(schema);
+// Returns: boolean
+```
 
-## Examples
+#### `getEntityInfo(data)`
+Extract entity information.
+
+```javascript
+const info = parser.getEntityInfo(schema);
+// Returns: AIMLEntityInfo | null
+```
+
+### Static Methods
+
+```javascript
+// Quick validation
+const result = AIMLParser.validate(schema, options);
+
+// Factory methods
+const prodParser = AIMLParser.createProduction();
+const devParser = AIMLParser.createDevelopment();
+
+// Utility methods
+const version = AIMLParser.getVersion(); // "2.0.0"
+const entityTypes = AIMLParser.getEntityTypes();
+const categories = AIMLParser.getEntityCategories();
+const modules = AIMLParser.getModules();
+const contexts = AIMLParser.getContexts();
+```
+
+## 📊 Validation Result
+
+```javascript
+{
+  isValid: boolean,           // Overall validation status
+  errors: AIMLValidationError[],     // Critical errors
+  warnings: AIMLValidationError[],   // Warnings
+  suggestions: AIMLValidationError[], // Improvement suggestions
+  entityInfo: {               // Entity information
+    entityType: string,
+    entityCategory: string,
+    subcategory?: string,
+    baseSchema: string,
+    modules: string[],
+    contexts: string[],
+    hasSemanticProperties: boolean,
+    hasIntentContext: boolean
+  },
+  score: number,              // Quality score (0-100)
+  completeness: number,       // Completeness percentage
+  performance: {              // Performance metrics
+    schemaSize: number,
+    complexity: 'low'|'medium'|'high',
+    moduleCount: number
+  }
+}
+```
+
+## 🌐 Browser Usage
+
+### CDN (UMD)
+
+```html
+<script src="https://unpkg.com/@meta-aiml/parser@2.0.0/dist/aiml-parser.min.js"></script>
+<script>
+  const parser = new AIMLParser();
+  const result = parser.validate(mySchema);
+</script>
+```
+
+### ES Modules
+
+```html
+<script type="module">
+  import AIMLParser from 'https://unpkg.com/@meta-aiml/parser@2.0.0/dist/index.esm.js';
+
+  const parser = new AIMLParser();
+  const result = parser.validate(mySchema);
+</script>
+```
+
+## 🔍 Examples
 
 ### Restaurant Entity
+
 ```javascript
-const restaurant = await parser.parseEntity({
-  "@context": "https://schemas.meta-aiml.org",
+const restaurantSchema = {
+  "@context": "https://schemas.meta-aiml.org/v2.0.0/context.jsonld",
+  "@id": "https://example.com/restaurant",
   "@type": "Restaurant",
+  "schemaVersion": "2.0.0",
   "entityType": "restaurant",
-  "name": "Joe's Pizza",
-  "description": "Authentic Italian pizza",
-  "cuisine": ["Italian", "Pizza"],
-  "priceRange": "$$",
-  "address": {
-    "streetAddress": "123 Main St",
-    "addressLocality": "New York",
-    "addressRegion": "NY",
-    "postalCode": "10001"
+  "entityCategory": "organization",
+  "subcategory": "hospitality",
+  "name": {
+    "en": "The Garden Bistro",
+    "es": "Bistro El Jardín"
   },
-  "modules": [
-    {
-      "$ref": "/schemas/templates/module/location.json"
+  "description": {
+    "en": "A delightful garden restaurant featuring farm-to-table cuisine"
+  },
+  "url": "https://gardenbistro.com",
+  "modules": {
+    "location": {
+      "version": "2.0.0",
+      "enabled": true
     },
-    {
-      "$ref": "/schemas/templates/module/payments.json"
+    "multilingual": {
+      "version": "2.0.0",
+      "enabled": true,
+      "supported_languages": ["en", "es"]
     }
-  ]
-});
+  },
+  "semanticProperties": {
+    "subjectiveQualities": {
+      "ambiance": {
+        "rating": 0.9,
+        "description": "Cozy garden setting"
+      }
+    }
+  }
+};
+
+const result = AIMLParser.validate(restaurantSchema);
+console.log(result);
 ```
 
-### E-commerce Store
+### E-commerce Marketplace
+
 ```javascript
-const store = await parser.parseEntity({
-  "@context": "https://schemas.meta-aiml.org",
-  "@type": "OnlineStore",
-  "entityType": "ecommerce_store",
-  "name": "Tech Gadgets Store",
-  "description": "Latest tech gadgets and accessories",
-  "categories": [
-    {
-      "id": "electronics",
-      "name": "Electronics",
-      "description": "Electronic devices and accessories"
-    }
-  ],
-  "paymentMethods": ["credit_card", "paypal", "apple_pay"],
-  "modules": [
-    {
-      "$ref": "/schemas/templates/module/payments.json"
-    },
-    {
-      "$ref": "/schemas/templates/module/logistics.json"
-    }
-  ]
-});
+const marketplaceSchema = {
+  "@context": "https://schemas.meta-aiml.org/v2.0.0/context.jsonld",
+  "entityType": "marketplace",
+  "entityCategory": "product_offering",
+  "subcategory": "ecommerce_platform",
+  "name": "TechBazaar",
+  "description": "Global technology marketplace",
+  "modules": {
+    "payments": { "enabled": true },
+    "search": { "enabled": true },
+    "recommendations": { "enabled": true }
+  }
+};
 ```
 
-### Validation Only
+## 🚀 Advanced Usage
+
+### Custom Validation Configuration
+
 ```javascript
-const validator = new AIMLValidator({
-  strictMode: true,
-  validateModules: true
+const strictParser = new AIMLParser({
+  debug: true,
+  strict: true,
+  version: '2.0.0'
 });
 
-const result = await validator.validate(entityData);
+const result = strictParser.validate(schema);
+```
 
-if (result.valid) {
-  console.log('✅ Entity is valid');
-} else {
-  console.log('❌ Validation errors:');
+### Batch Validation
+
+```javascript
+const schemas = [schema1, schema2, schema3];
+const results = schemas.map(schema => AIMLParser.validate(schema));
+
+const validSchemas = results.filter(r => r.isValid);
+const invalidSchemas = results.filter(r => !r.isValid);
+```
+
+### Error Handling
+
+```javascript
+const result = parser.validate(schema);
+
+if (!result.isValid) {
+  console.log('Critical Errors:');
   result.errors.forEach(error => {
-    console.log(`  ${error.path}: ${error.message}`);
+    console.log(`- ${error.field}: ${error.message}`);
+    if (error.suggestion) {
+      console.log(`  💡 ${error.suggestion}`);
+    }
+  });
+
+  console.log('Warnings:');
+  result.warnings.forEach(warning => {
+    console.log(`- ${warning.field}: ${warning.message}`);
   });
 }
 ```
 
-## Module System
+## 🏗️ Build & Development
 
-AIML supports a modular architecture where entities can include various modules:
+```bash
+# Install dependencies
+npm install
 
-```javascript
-const entityWithModules = {
-  // ... entity data
-  "modules": [
-    {
-      "$ref": "/schemas/templates/module/auth.json",
-      "required": true,
-      "properties": {
-        "authProvider": "oauth2",
-        "supportedMethods": ["google", "facebook"]
-      }
-    },
-    {
-      "$ref": "/schemas/templates/module/payments.json",
-      "required": true,
-      "properties": {
-        "supportedGateways": ["stripe", "paypal"]
-      }
-    }
-  ]
-};
+# Build the package
+npm run build
+
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
 ```
 
-Available modules:
-- `auth` - Authentication
-- `payments` - Payment processing
-- `location` - Geolocation services
-- `notifications` - Notification systems
-- `search` - Search functionality
-- `security` - Security features
-- `multilingual` - Multi-language support
-- And more...
+## 📋 Schema Structure
 
-## TypeScript Support
+AIML schemas follow this hierarchy:
 
-Full TypeScript definitions included:
-
-```typescript
-import type {
-  RestaurantEntity,
-  ValidationResult,
-  AIMLModule
-} from '@meta-aiml/parser';
-
-const restaurant: RestaurantEntity = {
-  "@context": "https://schemas.meta-aiml.org",
-  "@type": "Restaurant",
-  entityType: "restaurant",
-  name: "My Restaurant",
-  cuisine: ["Italian"]
-};
-
-const result: ValidationResult = await parser.validate(restaurant);
+```
+@type → entityCategory → subcategory → entityType
 ```
 
-## Error Handling
+Example: `Hotel → organization → hospitality → hotel`
 
-```javascript
-try {
-  const entity = await parser.parseEntity(data);
-  console.log('Parsed successfully:', entity);
-} catch (error) {
-  if (error.message.includes('Validation failed')) {
-    console.log('Schema validation error');
-  } else if (error.message.includes('Could not detect entity type')) {
-    console.log('Please specify entityType');
-  } else {
-    console.log('Unexpected error:', error.message);
-  }
-}
-```
+## 🤝 Contributing
 
-## Browser Events
+We welcome contributions! Please see our [Contributing Guide](https://github.com/meta-aiml-org/SDK/blob/main/CONTRIBUTING.md) for details.
 
-When using `generateForm()`, listen for events:
+## 📄 License
 
-```javascript
-document.addEventListener('aiml-form-result', (event) => {
-  const { success, entity, error } = event.detail;
+Source-Available License - see [LICENSE](LICENSE) file for details.
 
-  if (success) {
-    console.log('Generated entity:', entity);
-    // Send to server, display preview, etc.
-  } else {
-    console.error('Form error:', error);
-    // Show error message to user
-  }
-});
-```
+## 🔗 Links
 
-## Performance
+- **GitHub Repository**: https://github.com/meta-aiml-org/SDK
+- **NPM Package**: https://www.npmjs.com/package/@meta-aiml/parser
+- **Meta-AIML.org**: https://meta-aiml.org
+- **Schema Documentation**: https://meta-aiml.org/docs
+- **Issue Tracker**: https://github.com/meta-aiml-org/SDK/issues
 
-- **Caching**: Schemas are cached automatically
-- **Lazy Loading**: Schemas loaded on-demand
-- **Preloading**: Preload common schemas for better performance
+## 👨‍💻 Author
 
-```javascript
-import { SchemaLoader } from '@meta-aiml/parser';
+**META-AIML.ORG - IURII IURIEV**
 
-const loader = new SchemaLoader();
-await loader.preloadSchemas(['restaurant', 'hotel', 'product']);
-```
+---
 
-## License
-
-**Source-Available License** © 2025 Meta AIML Team
-
-This project is source-available under a custom license that permits:
-- ✅ **Usage** - Use in your applications and projects (including commercial)
-- ✅ **Inspection** - View and study the source code
-- ✅ **Learning** - Educational and research purposes
-
-But prohibits:
-- 🚫 **Modification** - Cannot alter or create derivative works
-- 🚫 **Redistribution** - Cannot share or republish the source code
-- 🚫 **Forking** - Cannot create competing implementations
-
-The project maintainer retains full control over development direction, feature roadmap, and contribution acceptance.
-
-See [LICENSE](./LICENSE) file for complete terms.
-
-## Links
-
-- 📖 [Documentation](https://meta-aiml.org/docs)
-- 🏠 [Homepage](https://meta-aiml.org)
-- 📦 [NPM Package](https://www.npmjs.com/package/@meta-aiml/parser)
-- 📋 [Schema Repository](https://schemas.meta-aiml.org)
+*Built for AI agents and developers.*

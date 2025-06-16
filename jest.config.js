@@ -1,24 +1,58 @@
 module.exports = {
-  preset: 'ts-jest',
+  // Test environment
   testEnvironment: 'node',
-  roots: ['<rootDir>/src', '<rootDir>/__tests__'],
+
+  // Test file patterns
   testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|js)',
-    '**/*.(test|spec).+(ts|tsx|js)'
+    '**/tests/**/*.test.js',
+    '**/tests/**/*.spec.js',
+    '**/__tests__/**/*.js'
   ],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest'
-  },
+
+  // Coverage collection
+  collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/index.ts'
+    'src/**/*.js',
+    '!src/**/*.test.js',
+    '!src/**/*.spec.js'
   ],
-  coverageDirectory: 'coverage',
+
+  // Coverage reporters
   coverageReporters: [
     'text',
+    'text-summary',
     'lcov',
     'html'
   ],
-  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts']
+
+  // Coverage thresholds
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  },
+
+  // Coverage directory
+  coverageDirectory: 'coverage',
+
+  // Setup files
+  setupFilesAfterEnv: [],
+
+  // Module paths
+  moduleFileExtensions: ['js', 'json'],
+
+  // Transform files
+  transform: {},
+
+  // Verbose output
+  verbose: true,
+
+  // Clear mocks automatically
+  clearMocks: true,
+
+  // Restore mocks automatically
+  restoreMocks: true
 };

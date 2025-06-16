@@ -1,42 +1,57 @@
 # Contributing to @meta-aiml/parser
 
-Thank you for your interest in contributing to the AIML Parser SDK! We welcome contributions from the community.
+Thank you for your interest in contributing to the AIML Parser SDK! This document provides guidelines and information for contributors.
 
-## 🚀 Getting Started
+## 🤝 How to Contribute
 
-### Prerequisites
+### Reporting Issues
 
-- Node.js 16+
+Before creating an issue, please:
+
+1. **Search existing issues** to avoid duplicates
+2. **Use the issue template** if provided
+3. **Provide detailed information** including:
+   - SDK version
+   - Node.js version
+   - Operating system
+   - Schema that caused the issue
+   - Expected vs actual behavior
+   - Steps to reproduce
+
+### Suggesting Enhancements
+
+We welcome suggestions for new features or improvements:
+
+1. **Check existing feature requests** first
+2. **Create a detailed enhancement request** with:
+   - Use case description
+   - Proposed solution
+   - Alternative solutions considered
+   - Expected benefits
+
+### Contributing Code
+
+#### Prerequisites
+
+- Node.js 14.x or higher
 - npm or yarn
 - Git
 
-### Development Setup
+#### Setup Development Environment
 
-1. **Fork the repository**
-   ```bash
-   # Click "Fork" on GitHub, then clone your fork
-   git clone https://github.com/YOUR_USERNAME/sdk.git
-   cd sdk
-   ```
+```bash
+# Fork and clone the repository
+git clone https://github.com/YOUR_USERNAME/SDK.git
+cd SDK
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Install dependencies
+npm install
 
-3. **Build the project**
-   ```bash
-   npm run build
-   ```
+# Run tests to ensure everything works
+npm test
+```
 
-4. **Run tests**
-   ```bash
-   npm test
-   ```
-
-## 📝 Development Workflow
-
-### Code Changes
+#### Development Workflow
 
 1. **Create a feature branch**
    ```bash
@@ -44,255 +59,236 @@ Thank you for your interest in contributing to the AIML Parser SDK! We welcome c
    ```
 
 2. **Make your changes**
-   - Write code following our style guide
+   - Write code following our style guidelines
    - Add tests for new functionality
-   - Update documentation if needed
+   - Update documentation as needed
 
 3. **Test your changes**
    ```bash
-   npm run test
-   npm run type-check
-   npm run lint
+   npm test           # Run all tests
+   npm run lint       # Check code style
+   npm run build      # Test build process
    ```
 
 4. **Commit your changes**
    ```bash
    git add .
-   git commit -m "feat: add new functionality"
+   git commit -m "feat: add new validation feature"
    ```
 
-5. **Push and create PR**
+5. **Push and create a pull request**
    ```bash
    git push origin feature/your-feature-name
-   # Open PR on GitHub
    ```
 
-### Commit Convention
+## 📋 Development Guidelines
 
-We use [Conventional Commits](https://conventionalcommits.org/):
+### Code Style
 
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `docs:` - Documentation changes
-- `style:` - Code style changes
-- `refactor:` - Code refactoring
-- `test:` - Test additions/changes
-- `chore:` - Build process or auxiliary tool changes
+- **JavaScript ES6+**: Use modern JavaScript features
+- **ESLint**: Follow the configured linting rules
+- **Prettier**: Use for code formatting
+- **JSDoc**: Document all public methods and classes
 
-Examples:
-```bash
-feat: add support for new entity type
-fix: resolve validation error for modules
+### Testing
+
+- **Unit Tests**: Required for all new features
+- **Coverage**: Maintain minimum 80% code coverage
+- **Test Cases**: Include both positive and negative test cases
+- **Edge Cases**: Test boundary conditions and error scenarios
+
+### Documentation
+
+- **README**: Update if adding new features
+- **JSDoc**: Document all public APIs
+- **Examples**: Add examples for new functionality
+- **CHANGELOG**: Update for all changes
+
+### Commit Messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+type(scope): description
+
+feat: add new entity validation
+fix: correct schema parsing error
 docs: update API documentation
-test: add tests for parser functionality
+test: add tests for new feature
+refactor: improve validation performance
 ```
 
-## 🧪 Testing
+Types:
+- `feat`: New features
+- `fix`: Bug fixes
+- `docs`: Documentation changes
+- `test`: Test additions or modifications
+- `refactor`: Code refactoring
+- `perf`: Performance improvements
+- `style`: Code style changes
+- `build`: Build system changes
 
-### Running Tests
-```bash
-# Run all tests
-npm test
+## 🏗️ Project Structure
 
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
 ```
+src/
+├── index.js          # Main SDK file
+├── index.d.ts        # TypeScript definitions
+tests/
+├── parser.test.js    # Test suite
+examples/
+├── basic-usage.js    # Usage examples
+docs/
+├── README.md         # Main documentation
+├── CHANGELOG.md      # Version history
+├── CONTRIBUTING.md   # This file
+```
+
+## 🧪 Testing Guidelines
 
 ### Writing Tests
 
-- Place tests in `__tests__/` directory
-- Use descriptive test names
-- Test both success and error cases
-- Mock external dependencies
-
-Example test:
 ```javascript
-import { AIMLParser } from '../src/parser';
-
-describe('AIMLParser', () => {
-  let parser: AIMLParser;
-
-  beforeEach(() => {
-    parser = new AIMLParser();
+describe('Feature Name', () => {
+  test('should handle valid input', () => {
+    const result = parser.validate(validSchema);
+    expect(result.isValid).toBe(true);
   });
 
-  it('should parse valid restaurant entity', async () => {
-    const data = {
-      "@context": "https://schemas.meta-aiml.org",
-      "@type": "Restaurant",
-      "entityType": "restaurant",
-      "name": "Test Restaurant"
-    };
-
-    const result = await parser.parseEntity(data);
-
-    expect(result.entityType).toBe('restaurant');
-    expect(result.name).toBe('Test Restaurant');
-  });
-
-  it('should throw error for invalid data', async () => {
-    await expect(parser.parseEntity(null))
-      .rejects
-      .toThrow('Invalid input data');
+  test('should handle invalid input', () => {
+    const result = parser.validate(invalidSchema);
+    expect(result.isValid).toBe(false);
+    expect(result.errors).toHaveLength(1);
   });
 });
 ```
 
-## 📚 Documentation
+### Test Categories
+
+- **Unit Tests**: Test individual functions/methods
+- **Integration Tests**: Test component interactions
+- **Validation Tests**: Test schema validation logic
+- **Performance Tests**: Test performance characteristics
+
+### Running Tests
+
+```bash
+npm test              # Run all tests
+npm run test:watch    # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
+```
+
+## 📚 Documentation Guidelines
 
 ### API Documentation
 
-- Update JSDoc comments for public methods
-- Include parameter types and descriptions
-- Provide usage examples
+Use JSDoc for all public methods:
 
-Example:
-```typescript
+```javascript
 /**
- * Parse raw data into AIML entity
- * @param data - Raw entity data object
- * @param entityType - Optional entity type override
- * @returns Promise resolving to parsed AIML entity
- * @throws Error if data is invalid or parsing fails
+ * Validate AIML schema
+ * @param {string|Object} data - Schema to validate
+ * @returns {AIMLValidationResult} Validation result
  * @example
- * ```typescript
- * const entity = await parser.parseEntity({
- *   "@type": "Restaurant",
- *   "entityType": "restaurant",
- *   "name": "My Restaurant"
- * });
- * ```
+ * const result = parser.validate(schema);
+ * console.log(result.isValid);
  */
-async parseEntity(data: any, entityType?: SchemaType): Promise<AIMLEntity>
+validate(data) {
+  // Implementation
+}
 ```
 
-### README Updates
+### Examples
 
-When adding new features:
-- Update installation instructions if needed
-- Add examples for new functionality
-- Update API reference section
-- Add to feature list if significant
+Provide clear, runnable examples:
 
-## 🎯 Types of Contributions
+```javascript
+// ✅ Good example
+const parser = new AIMLParser();
+const schema = {
+  "@context": "https://schemas.meta-aiml.org/v2.0.0/context.jsonld",
+  "entityType": "restaurant",
+  // ... complete example
+};
+const result = parser.validate(schema);
 
-### 🐛 Bug Reports
-
-Found a bug? Please create an issue with:
-
-- **Clear title** describing the problem
-- **Steps to reproduce** the issue
-- **Expected behavior** vs actual behavior
-- **Code sample** demonstrating the issue
-- **Environment details** (Node.js version, browser, etc.)
-
-### 💡 Feature Requests
-
-Have an idea? Create an issue with:
-
-- **Clear description** of the feature
-- **Use case** explaining why it's needed
-- **Proposed API** if applicable
-- **Alternative solutions** considered
-
-### 📖 Documentation
-
-Documentation improvements are always welcome:
-
-- Fix typos or unclear explanations
-- Add missing examples
-- Improve API documentation
-- Translate documentation
-
-### 🚀 Code Contributions
-
-Areas where we especially welcome contributions:
-
-- **New entity type support**
-- **Performance optimizations**
-- **Browser compatibility improvements**
-- **Additional validation features**
-- **Module system enhancements**
-- **TypeScript type improvements**
-
-## 🔍 Code Style
-
-### TypeScript Guidelines
-
-- Use TypeScript for all new code
-- Provide proper type annotations
-- Use interfaces for object shapes
-- Prefer `const` over `let` when possible
-
-### Formatting
-
-We use Prettier for code formatting:
-```bash
-npm run format
+// ❌ Incomplete example
+const result = parser.validate(someSchema);
 ```
 
-### Linting
+## 🚀 Release Process
 
-We use ESLint for code quality:
-```bash
-npm run lint
-npm run lint:fix
-```
+### Version Numbering
 
-## 🔄 Release Process
+We follow [Semantic Versioning](https://semver.org/):
 
-Releases are handled by maintainers:
+- **MAJOR**: Breaking changes
+- **MINOR**: New features (backward compatible)
+- **PATCH**: Bug fixes (backward compatible)
 
-1. Version bump using semantic versioning
-2. Update CHANGELOG.md
-3. Create GitHub release
-4. Publish to NPM automatically via GitHub Actions
+### Creating Releases
 
-## 🤝 Code of Conduct
+1. Update version in `package.json`
+2. Update `CHANGELOG.md`
+3. Create and push git tag
+4. Publish to npm
+5. Create GitHub release
 
-### Our Standards
+## 🛡️ Security
 
-- **Be respectful** and inclusive
-- **Be collaborative** and helpful
-- **Be patient** with newcomers
-- **Focus on constructive feedback**
+### Reporting Security Issues
 
-### Unacceptable Behavior
+**Do not create public issues for security vulnerabilities.**
 
-- Harassment or discriminatory language
-- Personal attacks or trolling
-- Spam or off-topic discussions
-- Sharing private information without permission
+Instead:
+1. Email security@meta-aiml.org
+2. Include detailed information
+3. Allow time for investigation
+4. Coordinate disclosure timeline
 
-## 📞 Getting Help
+### Security Guidelines
 
-Need help contributing?
+- No sensitive data in code or tests
+- Validate all input parameters
+- Use secure coding practices
+- Keep dependencies updated
 
-- 💬 Create a discussion on GitHub
-- 📧 Email: sdk@meta-aiml.org
-- 📖 Check our [documentation](https://meta-aiml.org/docs)
+## 💬 Communication
 
-## 🏆 Recognition
+### Getting Help
 
-Contributors will be:
+- **GitHub Issues**: Bug reports and feature requests
+- **GitHub Discussions**: General questions and ideas
+- **Email**: security@meta-aiml.org for security issues
 
-- Listed in our CONTRIBUTORS.md file
-- Mentioned in release notes for significant contributions
-- Given credit in documentation for major features
+### Community Guidelines
 
-## 📋 Checklist
+- Be respectful and constructive
+- Help others learn and grow
+- Share knowledge and experience
+- Follow the code of conduct
 
-Before submitting a PR, ensure:
+## 📄 License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.
+
+## ✅ Checklist for Contributors
+
+Before submitting a pull request:
 
 - [ ] Code follows style guidelines
-- [ ] Tests pass (`npm test`)
-- [ ] TypeScript compiles (`npm run type-check`)
-- [ ] Linting passes (`npm run lint`)
-- [ ] Documentation updated if needed
+- [ ] Tests pass locally
+- [ ] New tests added for new features
+- [ ] Documentation updated
+- [ ] CHANGELOG.md updated
 - [ ] Commit messages follow convention
-- [ ] PR description explains changes clearly
+- [ ] No breaking changes (or clearly documented)
 
-Thank you for contributing to AIML Parser! 🎉
+## 🎉 Recognition
+
+Contributors will be:
+- Listed in the project README
+- Mentioned in release notes
+- Invited to join the contributors team
+
+Thank you for contributing to @meta-aiml/parser! 🚀
