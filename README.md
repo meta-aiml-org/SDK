@@ -522,7 +522,7 @@ Source-Available License - see [LICENSE](LICENSE) file.
 - **Meta-AIML.org**: https://meta-aiml.org
 - **Schema Documentation**: https://meta-aiml.org/docs
 - **UI Validator**: https://meta-aiml.org/playground
-- **Architecture Guide**: META_AIML_ARCHITECTURE_COMPLETE_v2.0.1.md
+
 
 ---
 
