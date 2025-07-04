@@ -1,7 +1,7 @@
 /**
- * AIML Parser SDK v2.0.0 - TypeScript Definitions
+ * AIML Parser SDK v2.0.1 - TypeScript Definitions
  *
- * @version 2.0.0
+ * @version 2.0.1
  * @author META-AIML.ORG - IURII IURIEV
  */
 
@@ -49,9 +49,8 @@ declare module '@meta-aiml/parser' {
     subcategory?: string;
     baseSchema: string;
     modules: string[];
-    contexts: string[];
-    hasSemanticProperties: boolean;
-    hasIntentContext: boolean;
+    hasEntityCapabilities: boolean;
+    hasSiteCapabilities: boolean;
   }
 
   /**
@@ -92,11 +91,24 @@ declare module '@meta-aiml/parser' {
     description?: string | Record<string, string>;
     url?: string;
     shortDescription?: string;
-    properties?: Record<string, unknown>;
-	modules?: Record<string, ModuleConfig>;
-	semanticProperties?: SemanticProperties;
-    intentContext?: Record<string, any>;
-    appliedContexts?: string[];
+    properties?: Record<string, any>;
+    modules?: Record<string, any>;
+    entityCapabilities?: {
+      functionalFeatures?: Record<string, boolean>;
+      contentTypes?: string[];
+      businessModel?: string;
+      paymentMethods?: string[];
+      [key: string]: any;
+    };
+    siteCapabilities?: {
+      availableActions?: string[];
+      interactionMethods?: string[];
+      contentAccess?: string[];
+      supportedDevices?: string[];
+      languages?: string[];
+      realTimeFeatures?: string[];
+      [key: string]: any;
+    };
     [key: string]: any;
   }
 
@@ -168,15 +180,17 @@ declare module '@meta-aiml/parser' {
      */
     static getModules(): string[];
 
-    /**
-     * Get all available contexts
-     */
-    static getContexts(): string[];
+
 
     /**
      * Get all available subcategories
      */
     static getSubcategories(): string[];
+
+    /**
+     * Get required modules for specific entity type
+     */
+    static getRequiredModules(entityType: string): string[];
 
     /**
      * Validate configuration object

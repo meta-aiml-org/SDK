@@ -2,8 +2,92 @@
 
 All notable changes to the `@meta-aiml/parser` package will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
+## [2.0.1] - 2025-07-02
+
+### ⭐ **NEW v2.0.1 - Exact UI Validator Logic**
+
+#### 🔧 **New Required Fields - Objective Business Capabilities**
+
+- **entityCapabilities** - Objective business capabilities (NEW in v2.0.1)
+  - `functionalFeatures`: Boolean functions for objectively verifiable capabilities
+  - `contentTypes`: Types of content available on the site
+  - `businessModel`: Business operation model
+  - `paymentMethods`: Supported payment methods
+
+- **siteCapabilities** - Website interaction capabilities (NEW in v2.0.1)
+  - `availableActions`: Actions available to users on the site
+  - `interactionMethods`: Ways users can interact with the business
+  - `contentAccess`: Content accessibility levels
+  - `supportedDevices`: Supported devices
+  - `languages`: Interface languages
+  - `realTimeFeatures`: Real-time functionality features
+
+#### 🎯 **META-AIML Intelligent Scoring Engine v2.0.1**
+
+- **🟢 90-100 EXCELLENT**: No warnings, completeness contributes to achieving 100 points
+- **🟡 50-89 GOOD**: Functional schema with warnings or few errors
+- **🔴 0-49 POOR**: Multiple critical errors (>3 errors)
+
+**Scoring Algorithm:**
+1. Base calculation: 100 - (ERRORS×30 + WARNINGS×10 + SUGGESTIONS×5)
+2. Intelligent Scoring Engine logic:
+   - No WARNINGS → start from 90 + (completeness × 10%) up to 100
+   - Has ERRORS but ≤3 → minimum 50 points (Good zone)
+   - Many ERRORS >3 → can fall to Poor zone (floor at 25 points)
+
+#### 🔧 **Enhanced Validation Engine v2.0.1**
+
+- **Critical Required Fields** (ERRORS if missing): `@context`, `@id`, `@type`, `schemaVersion`, `entityType`, `entityCategory`, `name`, `description`
+- **Exact Context Validation**: Must be exactly `"https://schemas.meta-aiml.org/v2.0.1/context.jsonld"`
+- **Exact Version Validation**: Must be exactly `"2.0.1"`
+- **New v2.0.1 Fields** (WARNINGS if missing): `entityCapabilities`, `siteCapabilities`
+
+**Required Modules by Entity Type** (from required_fields_v2.0.1.md):
+- **Clinic**: `auth`, `security`, `compliance`
+- **EducationPlatform**: `auth`, `user_management`
+- **Hotel**: `location`, `payments`
+- **Restaurant**: `location`
+- **EcommerceStore**: `auth`, `payments`
+- **Marketplace**: `auth`, `payments`, `user_management`
+- **GenerativeAIPlatform**: `auth`, `security`
+- **RidesharingService**: `auth`, `location`
+- **SocialNetwork**: `auth`, `user_management`
+- **OnlineBanking**: `auth`, `security`, `compliance`
+- **TelemedicinePlatform**: `auth`, `security`, `compliance`, `streaming`
+
+#### 🌍 **Enhanced Multilingual Support v2.0.1**
+
+- **Multilingual Objects Required**: `name` and `description` must be objects (not strings)
+- **English Requirement**: English ("en") field is mandatory in multilingual objects
+- **Language Code Validation**: ISO 639-1 format validation (e.g., "en", "es", "fr", "en-US")
+- **Description Length**: Minimum 50 characters for English descriptions
+- **Empty Value Validation**: Warns about empty values in declared languages
+
+#### 📊 Improved Performance Metrics
+
+- **Completeness Calculation**: Enhanced field coverage analysis
+- **Quality Scoring**: Updated scoring algorithm (25 points for errors, 10 for warnings, 5 for suggestions)
+- **Complexity Assessment**: Better module count and schema size analysis
+
+### ❌ **Removed in v2.0.1**
+
+From enhanced-aiml-validator.ts validation logic:
+- `semanticProperties` - Replaced by objective `entityCapabilities`
+- `intentContext` - Replaced by concrete `siteCapabilities.availableActions`
+- `appliedContexts` - Context references no longer supported
+- **`context/` folder validation** - Geographic, cultural and regulatory contexts validation removed
+
+#### 🛠️ Developer Experience
+
+- **Enhanced Error Messages**: More detailed error descriptions with exact suggestions
+- **TypeScript Improvements**: Updated type definitions with v2.0.1 fields
+- **Static Methods**: New utility methods:
+  - `getAvailableContexts()`: Get available contexts list
+  - `getRequiredModules(entityType)`: Get required modules for entity type
 
 ## [2.0.0] - 2025-06-15
 
@@ -179,4 +263,4 @@ All users of v1.0.0 must migrate to v2.0.0. Please refer to the migration guide 
 
 ---
 
-**For complete documentation and examples, visit our [website](https://meta-aiml.org/).**
+**For complete documentation and examples, visit our [GitHub repository](https://github.com/meta-aiml-org/SDK).**
