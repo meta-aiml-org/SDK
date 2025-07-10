@@ -145,7 +145,7 @@ const SUBCATEGORY_VALIDATION_RULES = {
 };
 
 const AVAILABLE_MODULES = [
-  "auth", "compliance", "location", "logistics", "multilingual",
+  "auth", "compliance", "enhanced-auth", "location", "logistics", "multilingual",
   "notification", "payments", "recommendations", "search", "security",
   "streaming", "subscription", "user-management", "warranty"
 ];
