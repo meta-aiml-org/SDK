@@ -224,7 +224,7 @@ const devParser = AIMLParser.createDevelopment();
 const version = AIMLParser.getVersion(); // "2.0.1"
 const entityTypes = AIMLParser.getEntityTypes(); // All 31 types
 const categories = AIMLParser.getEntityCategories(); // 6 categories
-const modules = AIMLParser.getModules(); // 14 available modules
+const modules = AIMLParser.getModules(); // 15 available modules
 const subcategories = AIMLParser.getSubcategories(); // 15 subcategories
 ```
 
@@ -241,7 +241,7 @@ const subcategories = AIMLParser.getSubcategories(); // 15 subcategories
     entityCategory: string,   // One of 6 base categories
     subcategory: string,      // One of 15 subcategories
     baseSchema: string,       // Base schema category
-    modules: string[],        // Active modules (max 14)
+    modules: string[],        // Active modules (max 15)
     hasEntityCapabilities: boolean,  // NEW v2.0.1
     hasSiteCapabilities: boolean     // NEW v2.0.1
   },
@@ -401,7 +401,7 @@ console.log(`Quality Distribution: ${excellent} Excellent, ${good} Good, ${poor}
 
 ### Critical Fields (All entities)
 ```javascript
-// ERRORS if missing - from required_fields_v2.0.1.md
+// ERRORS if missing
 const criticalRequired = [
   '@context',      // Must be "https://schemas.meta-aiml.org/v2.0.1/context.jsonld"
   '@id',           // Unique URI identifier
