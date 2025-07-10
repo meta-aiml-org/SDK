@@ -184,7 +184,7 @@ export declare class AIMLParser {
   static getEntityCategories(): string[];
 
   /**
-   * Get all available modules (14 modules)
+   * Get all available modules (15 modules)
    */
   static getModules(): string[];
 
@@ -243,7 +243,7 @@ export declare const ENTITY_TYPES: {
  * Available modules from enhanced-aiml-validator.ts
  */
 export declare const AVAILABLE_MODULES: readonly [
-  "auth", "compliance", "location", "logistics", "multilingual",
+  "auth", "compliance", "enhanced-auth", "location", "logistics", "multilingual",
   "notification", "payments", "recommendations", "search", "security",
   "streaming", "subscription", "user-management", "warranty"
 ];
