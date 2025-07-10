@@ -120,11 +120,11 @@ const SUBCATEGORIES = {
   financial_services: ["online_banking"]
 };
 
-// Standard AIML modules (14 total)
+// Standard AIML modules (15 total)
 const STANDARD_MODULES = [
   "auth", "payments", "multilingual", "search", "user-management",
   "location", "streaming", "subscription", "security", "compliance",
-  "logistics", "notification", "recommendations", "warranty"
+  "logistics", "notification", "recommendations", "warranty", "enhanced-auth"
 ];
 
 // Required modules by entity type (from required_fields_v2.0.1.md)
