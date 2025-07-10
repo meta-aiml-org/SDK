@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Exact Version Validation**: Must be exactly `"2.0.1"`
 - **New v2.0.1 Fields** (WARNINGS if missing): `entityCapabilities`, `siteCapabilities`
 
-**Required Modules by Entity Type** (from required_fields_v2.0.1.md):
+**Required Modules by Entity Type** 
 - **Clinic**: `auth`, `security`, `compliance`
 - **EducationPlatform**: `auth`, `user_management`
 - **Hotel**: `location`, `payments`
